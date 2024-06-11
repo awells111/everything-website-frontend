@@ -13,24 +13,17 @@ import { text } from "stream/consumers";
  */
 function CharCounter() {
   const [textBoxContent, setTextBoxContent] = useState("");
-  const countWords = (text: String) => {
-    return text
-      .trim()
-      .split(/\s+/)
-      .filter((word) => word.length > 0).length;
+  const countWords = (text : String) => {
+    return text.trim().split(/\s+/).filter(word => word.length > 0).length;
   };
   return (
     <div>
       <div>
         <span>
-          Character Counter: <span>{textBoxContent.length}</span>
-          <br />
+          Character Counter: <span>{textBoxContent.length}</span><br />
           <span>
-            <span>
-              Word Counter: <span>{countWords(textBoxContent)}</span>
-            </span>
-            <br />
-            Lines: <span>{textBoxContent.split("\n").length}</span>
+            <span>Word Counter: <span>{countWords(textBoxContent)}</span></span><br />
+            Lines: <span>{textBoxContent.split('\n').length - 1}</span> 
           </span>
         </span>
       </div>

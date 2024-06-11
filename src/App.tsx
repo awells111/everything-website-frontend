@@ -1,15 +1,14 @@
 import React from "react";
 import "./App.css";
-import CharCounter from "./CharCounter/CharCounter";
+// import CharCounter from "./CharCounter/CharCounter";
+import TabbedInterface from "./TabbedInterface/TabbedInterface";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <CharCounter />
-      </header>
+      <TabbedInterface />
     </div>
   );
-}
+};
 
 export default App;
