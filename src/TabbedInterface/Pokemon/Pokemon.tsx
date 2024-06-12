@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Pokemon.css";
 import PokemonByType from "./PokemonByType/PokemonByType";
+import PokemonByName from "./PokemonByName/PokemonByName";
 
 export type PokemonListItemType = {
   name: string;
@@ -21,6 +22,10 @@ const Pokemon: React.FC = () => {
   return (
     <div>
       <PokemonByType
+        setPokemonDetails={setPokemonDetails}
+        setError={setError}
+      />
+      <PokemonByName
         setPokemonDetails={setPokemonDetails}
         setError={setError}
       />

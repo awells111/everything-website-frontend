@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PokemonDetailsType, PokemonListItemType } from "../Pokemon";
+import getPokemonTypes from "./getPokemonTypes";
 
 type Props = {
   setPokemonDetails: (pokemonDetails: PokemonDetailsType[]) => void;
@@ -7,7 +8,13 @@ type Props = {
 };
 
 function PokemonByType({ setPokemonDetails, setError }: Props) {
-  const [type, setType] = useState<string>("");
+  //const [type, setType] = useState<string>("");
+  const [selectedType, setSelectedType] = useState<string>("");
+
+  //todo feed this to a dropdown
+  const pokemonTypes = getPokemonTypes();
+
+  // in the dropdown you would do something like pok
 
   const fetchPokemonByType = async (type: string) => {
     try {
@@ -43,17 +50,26 @@ function PokemonByType({ setPokemonDetails, setError }: Props) {
   };
 
   const handleFetch = () => {
-    fetchPokemonByType(type);
+    if (selectedType) {
+      fetchPokemonByType(selectedType);
+    } else {
+      setError("Please select a type");
+    }
   };
   return (
     <div>
       <h2>Pokémon by Type</h2>
-      <input
-        type="text"
-        value={type}
-        onChange={(e) => setType(e.target.value)}
-        placeholder="Enter Pokémon type"
-      />
+      <select
+        value={selectedType}
+        onChange={(e) => setSelectedType(e.target.value)}
+      >
+        <option value="">Select a type</option>
+        {pokemonTypes.map((type) => (
+          <option key={type.name} value={type.name}>
+            {type.name}
+          </option>
+        ))}
+      </select>
       <button onClick={handleFetch}>Fetch Pokémon</button>
     </div>
   );
