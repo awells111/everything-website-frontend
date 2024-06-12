@@ -1,6 +1,5 @@
-// PokemonByType.tsx
 import React, { useState } from "react";
-import "./PokemonByType.css"; // Import the CSS file
+import "./Pokemon.css";
 
 type Pokemon = {
   name: string;

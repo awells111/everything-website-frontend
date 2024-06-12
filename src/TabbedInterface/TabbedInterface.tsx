@@ -1,8 +1,8 @@
 // TabbedInterface.tsx
 import React, { useState } from 'react';
-import CharCounter from '../CharCounter/CharCounter';
-import PokemonByType from '../pokemonByType/pokemonByType';
+import CharCounter from './CharCounter/CharCounter';
 import './Tabs.css';
+import PokemonByType from './Pokemon/Pokemon';
 
 type TabName = 'charCounter' | 'pokemonByType';
 
@@ -24,7 +24,7 @@ const TabbedInterface: React.FC = () => {
     <div>
       <div className="tabs">
         <button onClick={() => setActiveTab('charCounter')}>Char Counter</button>
-        <button onClick={() => setActiveTab('pokemonByType')}>Pokémon by Type</button>
+        <button onClick={() => setActiveTab('pokemonByType')}>Pokémon</button>
       </div>
       <div className="tab-content">
         {renderContent()}
