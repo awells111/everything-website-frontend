@@ -1,20 +1,20 @@
 // TabbedInterface.tsx
-import React, { useState } from 'react';
-import CharCounter from './CharCounter/CharCounter';
-import './Tabs.css';
-import PokemonByType from './Pokemon/Pokemon';
+import React, { useState } from "react";
+import CharCounter from "./CharCounter/CharCounter";
+import "./Tabs.css";
+import Pokemon from "./Pokemon/Pokemon";
 
-type TabName = 'charCounter' | 'pokemonByType';
+type TabName = "charCounter" | "pokemonByType";
 
 const TabbedInterface: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabName>('charCounter');
+  const [activeTab, setActiveTab] = useState<TabName>("charCounter");
 
   const renderContent = () => {
-    switch(activeTab) {
-      case 'charCounter':
+    switch (activeTab) {
+      case "charCounter":
         return <CharCounter />;
-      case 'pokemonByType':
-        return <PokemonByType />;
+      case "pokemonByType":
+        return <Pokemon />;
       default:
         return <CharCounter />;
     }
@@ -23,12 +23,12 @@ const TabbedInterface: React.FC = () => {
   return (
     <div>
       <div className="tabs">
-        <button onClick={() => setActiveTab('charCounter')}>Char Counter</button>
-        <button onClick={() => setActiveTab('pokemonByType')}>Pokémon</button>
+        <button onClick={() => setActiveTab("charCounter")}>
+          Char Counter
+        </button>
+        <button onClick={() => setActiveTab("pokemonByType")}>Pokémon</button>
       </div>
-      <div className="tab-content">
-        {renderContent()}
-      </div>
+      <div className="tab-content">{renderContent()}</div>
     </div>
   );
 };
