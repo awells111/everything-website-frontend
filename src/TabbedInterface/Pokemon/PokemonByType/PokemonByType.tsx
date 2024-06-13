@@ -8,13 +8,27 @@ type Props = {
 };
 
 function PokemonByType({ setPokemonDetails, setError }: Props) {
-  //const [type, setType] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<string>("");
-
-  //todo feed this to a dropdown
   const pokemonTypes = getPokemonTypes();
 
-  // in the dropdown you would do something like pok
+  const capitalize = (pokemonName: string) => {
+    const stringParts: string[] = pokemonName.split("-");
+
+    for (let index = 0; index < stringParts.length; index++) {
+      const stringPart = stringParts[index];
+      if (stringPart === "gmax" || stringParts[index] === "mega") {
+        stringParts[index] = stringPart.toUpperCase();
+        // Continue to the next iteration of the loop
+        continue;
+      }
+      stringParts[index] =
+        stringPart.charAt(0).toUpperCase() + stringPart.slice(1).toLowerCase();
+    }
+    const capitalizedName = stringParts.join("-");
+
+    return capitalizedName;
+  };
+
+  const [selectedType, setSelectedType] = useState<string>("");
 
   const fetchPokemonByType = async (type: string) => {
     try {
@@ -34,7 +48,7 @@ function PokemonByType({ setPokemonDetails, setError }: Props) {
           const response = await fetch(pokemon.url);
           const data = await response.json();
           return {
-            name: data.name,
+            name: capitalize(data.name),
             sprite: data.sprites.front_default,
           };
         }
@@ -66,7 +80,7 @@ function PokemonByType({ setPokemonDetails, setError }: Props) {
         <option value="">Select a type</option>
         {pokemonTypes.map((type) => (
           <option key={type.name} value={type.name}>
-            {type.name}
+            {type.display}
           </option>
         ))}
       </select>
