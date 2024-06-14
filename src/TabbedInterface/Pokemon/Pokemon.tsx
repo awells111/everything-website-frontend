@@ -11,6 +11,10 @@ export type PokemonListItemType = {
 export type PokemonDetailsType = {
   name: string;
   sprite: string;
+  types: string;
+  height: string;
+  weight: string;
+  abilities: string;
 };
 
 const Pokemon: React.FC = () => {
