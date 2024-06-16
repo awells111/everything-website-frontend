@@ -1,12 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Pokemon.css";
 import PokemonByType from "./PokemonByType/PokemonByType";
 import PokemonByName from "./PokemonByName/PokemonByName";
-
-export type PokemonListItemType = {
-  name: string;
-  url: string;
-};
 
 export type PokemonDetailsType = {
   name: string;
@@ -18,38 +13,10 @@ export type PokemonDetailsType = {
 };
 
 const Pokemon: React.FC = () => {
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetailsType[]>(
-    []
-  );
-  const [error, setError] = useState<string | null>(null);
-
   return (
     <div>
-      <PokemonByType
-        setPokemonDetails={setPokemonDetails}
-        setError={setError}
-      />
-      <PokemonByName
-        setPokemonDetails={setPokemonDetails}
-        setError={setError}
-      />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {/* Pokemon List */}
-      {pokemonDetails.length > 0 && (
-        <div>
-          <p>
-            <strong>Total Pokémon:</strong> {pokemonDetails.length}
-          </p>
-          <div className="pokemon-list">
-            {pokemonDetails.map((pokemon, index) => (
-              <div key={index} className="pokemon-item">
-                <img src={pokemon.sprite} alt={pokemon.name} />
-                <p>{pokemon.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <PokemonByType />
+      <PokemonByName />
     </div>
   );
 };

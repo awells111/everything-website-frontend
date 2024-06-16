@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { PokemonDetailsType } from "../Pokemon";
 
-type Props = {
-  setPokemonDetails: (pokemonDetails: PokemonDetailsType[]) => void;
-  setError: (error: string | null) => void;
-};
-
 const capitalize = (str: string) =>
   str
-    .split('-')
+    .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
-    .join('-');
+    .join("-");
 
-const PokemonSearch: React.FC<Props> = ({ setError }) => {
+const PokemonSearch: React.FC = () => {
   const [pokemonName, setPokemonName] = useState<string>("");
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetailsType | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [pokemonDetails, setPokemonDetails] =
+    useState<PokemonDetailsType | null>(null);
 
   const fetchPokemonDetails = async (name: string) => {
     try {
@@ -28,10 +25,15 @@ const PokemonSearch: React.FC<Props> = ({ setError }) => {
       const details: PokemonDetailsType = {
         name: capitalize(data.name),
         sprite: data.sprites.front_default,
-        types: data.types.map((type: { type: { name: string } }) => capitalize(type.type.name)),
+        types: data.types.map((type: { type: { name: string } }) =>
+          capitalize(type.type.name)
+        ),
         height: data.height,
         weight: data.weight,
-        abilities: data.abilities.map((ability: { ability: { name: string } }) => capitalize(ability.ability.name)),
+        abilities: data.abilities.map(
+          (ability: { ability: { name: string } }) =>
+            capitalize(ability.ability.name)
+        ),
       };
       setPokemonDetails(details);
       setError(null);
