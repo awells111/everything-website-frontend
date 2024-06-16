@@ -1,75 +1,44 @@
-import React, { useState } from "react";
-import { PokemonDetailsType, PokemonListItemType } from "../Pokemon";
+import React, { useMemo, useState } from "react";
 import getPokemonTypes from "./getPokemonTypes";
+import { TypedDocumentNode, gql, useLazyQuery } from "@apollo/client";
+import { GetPokemonByTypeQuery, Pokemon } from "../../../__generated__/graphql";
 
-type Props = {
-  setPokemonDetails: (pokemonDetails: PokemonDetailsType[]) => void;
-  setError: (error: string | null) => void;
-};
-
-function PokemonByType({ setPokemonDetails, setError }: Props) {
-  const pokemonTypes = getPokemonTypes();
-
-  const capitalize = (pokemonName: string) => {
-    const stringParts: string[] = pokemonName.split("-");
-
-    for (let index = 0; index < stringParts.length; index++) {
-      const stringPart = stringParts[index];
-      if (stringPart === "gmax" || stringParts[index] === "mega") {
-        stringParts[index] = stringPart.toUpperCase();
-        // Continue to the next iteration of the loop
-        continue;
+export const POKEMON_BY_TYPE: TypedDocumentNode<GetPokemonByTypeQuery> = gql`
+  query GetPokemonByType($pokemonType: String!) {
+    pokemonByType(pokemonType: $pokemonType) {
+      id
+      name
+      sprites {
+        frontDefault
       }
-      stringParts[index] =
-        stringPart.charAt(0).toUpperCase() + stringPart.slice(1).toLowerCase();
     }
-    const capitalizedName = stringParts.join("-");
+  }
+`;
 
-    return capitalizedName;
-  };
-
+function PokemonByType() {
   const [selectedType, setSelectedType] = useState<string>("");
 
-  const fetchPokemonByType = async (type: string) => {
-    try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/type/${type.toLowerCase()}`
-      );
-      if (!response.ok) {
-        throw new Error("Type not found");
-      }
-      const data = await response.json();
-      const pokemonList = data.pokemon.map(
-        (p: { pokemon: PokemonListItemType }) => p.pokemon
-      );
-
-      const detailsPromises = pokemonList.map(
-        async (pokemon: PokemonListItemType) => {
-          const response = await fetch(pokemon.url);
-          const data = await response.json();
-          return {
-            name: capitalize(data.name),
-            sprite: data.sprites.front_default,
-          };
-        }
-      );
-
-      const details = await Promise.all(detailsPromises);
-      setPokemonDetails(details);
-      setError(null);
-    } catch (error: any) {
-      setError(error.message);
-      setPokemonDetails([]);
+  const [getPokemonByType, { loading, error, data }] = useLazyQuery(
+    POKEMON_BY_TYPE,
+    {
+      variables: { pokemonType: selectedType.toLowerCase() },
     }
-  };
+  );
 
-  const handleFetch = () => {
-    if (selectedType) {
-      fetchPokemonByType(selectedType);
-    } else {
-      setError("Please select a type");
+  type PartialPokemon = Omit<
+    Pokemon,
+    "abilities" | "height" | "types" | "weight"
+  >;
+  const pokemon: PartialPokemon[] = useMemo(() => {
+    if (!data) {
+      return [];
     }
-  };
+
+    return data.pokemonByType;
+  }, [data]);
+
+  const pokemonTypes = getPokemonTypes();
+
   return (
     <div>
       <h2>Pokémon by Type</h2>
@@ -84,7 +53,25 @@ function PokemonByType({ setPokemonDetails, setError }: Props) {
           </option>
         ))}
       </select>
-      <button onClick={handleFetch}>Fetch Pokémon</button>
+      <button onClick={() => getPokemonByType()}>Fetch Pokémon</button>
+
+      {error && <p style={{ color: "red" }}>{error.message}</p>}
+      {/* Pokemon List */}
+      {data && data.pokemonByType.length > 0 && (
+        <div>
+          <p>
+            <strong>Total Pokémon:</strong> {pokemon.length}
+          </p>
+          <div className="pokemon-list">
+            {pokemon.map((item, index) => (
+              <div key={index} className="pokemon-item">
+                <img src={item.sprites.frontDefault || ""} alt={item.name} />
+                <p>{item.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
