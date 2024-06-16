@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import getPokemonTypes from "./getPokemonTypes";
 import { TypedDocumentNode, gql, useLazyQuery } from "@apollo/client";
 import { GetPokemonByTypeQuery, Pokemon } from "../../../__generated__/graphql";
+import { capitalize } from "../util";
 
 export const POKEMON_BY_TYPE: TypedDocumentNode<GetPokemonByTypeQuery> = gql`
   query GetPokemonByType($pokemonType: String!) {
@@ -66,7 +67,7 @@ function PokemonByType() {
             {pokemon.map((item, index) => (
               <div key={index} className="pokemon-item">
                 <img src={item.sprites.frontDefault || ""} alt={item.name} />
-                <p>{item.name}</p>
+                <p>{capitalize(item.name)}</p>
               </div>
             ))}
           </div>

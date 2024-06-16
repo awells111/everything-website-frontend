@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { PokemonDetailsType } from "../Pokemon";
+
+export type PokemonDetailsType = {
+  name: string;
+  sprite: string;
+  types: string;
+  height: string;
+  weight: string;
+  abilities: string;
+};
 
 const capitalize = (str: string) =>
   str
