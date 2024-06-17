@@ -22,7 +22,7 @@ const getPokemonTypes: () => PokemonDropDownType[] = () => {
     { name: "poison", url: "https://pokeapi.co/api/v2/type/4/", display: "Poison" },
     { name: "psychic", url: "https://pokeapi.co/api/v2/type/14/", display: "Psychic" },
     { name: "rock", url: "https://pokeapi.co/api/v2/type/6/", display: "Rock" },
-    { name: "shadow", url: "https://pokeapi.co/api/v2/type/10002/" , display: "Shadow" },
+    // { name: "shadow", url: "https://pokeapi.co/api/v2/type/10002/" , display: "Shadow" },
     { name: "steel", url: "https://pokeapi.co/api/v2/type/9/", display: "Steel" },
     { name: "water", url: "https://pokeapi.co/api/v2/type/11/", display: "Water" },
     //{ name: "unknown", url: "https://pokeapi.co/api/v2/type/10001/" },

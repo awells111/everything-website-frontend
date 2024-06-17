@@ -2,15 +2,24 @@ import React, { useMemo, useState } from "react";
 import getPokemonTypes from "./getPokemonTypes";
 import { TypedDocumentNode, gql, useLazyQuery } from "@apollo/client";
 import { GetPokemonByTypeQuery, Pokemon } from "../../../__generated__/graphql";
-import { capitalize } from "../util";
+import PokemonMenu from "./PokemonMenu/PokemonMenu";
+import { CircularProgress, Grid } from "@mui/joy";
 
 export const POKEMON_BY_TYPE: TypedDocumentNode<GetPokemonByTypeQuery> = gql`
   query GetPokemonByType($pokemonType: String!) {
     pokemonByType(pokemonType: $pokemonType) {
       id
       name
+      displayName
       sprites {
         frontDefault
+      }
+      height
+      weight
+      abilities {
+        id
+        name
+        displayName
       }
     }
   }
@@ -18,19 +27,16 @@ export const POKEMON_BY_TYPE: TypedDocumentNode<GetPokemonByTypeQuery> = gql`
 
 function PokemonByType() {
   const [selectedType, setSelectedType] = useState<string>("");
+  const [activePokemon, setActivePokemon] = useState<Pokemon | null>(null);
 
   const [getPokemonByType, { loading, error, data }] = useLazyQuery(
     POKEMON_BY_TYPE,
     {
-      variables: { pokemonType: selectedType.toLowerCase() },
+      variables: { pokemonType: selectedType },
     }
   );
 
-  type PartialPokemon = Omit<
-    Pokemon,
-    "abilities" | "height" | "types" | "weight"
-  >;
-  const pokemon: PartialPokemon[] = useMemo(() => {
+  const pokemon: Pokemon[] = useMemo(() => {
     if (!data) {
       return [];
     }
@@ -57,22 +63,36 @@ function PokemonByType() {
       <button onClick={() => getPokemonByType()}>Fetch Pokémon</button>
 
       {error && <p style={{ color: "red" }}>{error.message}</p>}
-      {/* Pokemon List */}
-      {data && data.pokemonByType.length > 0 && (
-        <div>
-          <p>
-            <strong>Total Pokémon:</strong> {pokemon.length}
-          </p>
-          <div className="pokemon-list">
-            {pokemon.map((item, index) => (
-              <div key={index} className="pokemon-item">
-                <img src={item.sprites.frontDefault || ""} alt={item.name} />
-                <p>{capitalize(item.name)}</p>
-              </div>
-            ))}
+      <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+        <Grid xs={4}>
+          <div>
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <PokemonMenu
+                data={data}
+                pokemon={pokemon}
+                setActivePokemon={setActivePokemon}
+              />
+            )}
           </div>
-        </div>
-      )}
+        </Grid>
+        <Grid xs={8}>
+          {activePokemon && (
+            <div>
+              <h3>{activePokemon.displayName}</h3>
+              <img
+                src={activePokemon.sprites.frontDefault || ""}
+                alt={activePokemon.name}
+              />
+              <p>Height: {activePokemon.height}</p>
+              <p>Weight: {activePokemon.weight}</p>
+              {/* // <p>Types: {pokemonDetails.types}</p> */}
+              <p>Abilities: {activePokemon.abilities.map((ability) => ability.displayName).join(", ")}</p>
+            </div>
+          )}
+        </Grid>
+      </Grid>
     </div>
   );
 }
