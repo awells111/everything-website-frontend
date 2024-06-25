@@ -21,6 +21,12 @@ export const POKEMON_BY_TYPE: TypedDocumentNode<GetPokemonByTypeQuery> = gql`
         name
         displayName
       }
+      moves {
+        id
+        name
+        displayName
+        accuracy
+      }
     }
   }
 `;
@@ -87,8 +93,9 @@ function PokemonByType() {
               />
               <p>Height: {activePokemon.height}</p>
               <p>Weight: {activePokemon.weight}</p>
-              {/* // <p>Types: {pokemonDetails.types}</p> */}
+              {/* <p>Types: {activePokemon.types}</p> */}
               <p>Abilities: {activePokemon.abilities.map((ability) => ability.displayName).join(", ")}</p>
+              <p>Moves: {activePokemon.moves.map((move) => move.displayName).join(", ")}</p>
             </div>
           )}
         </Grid>
