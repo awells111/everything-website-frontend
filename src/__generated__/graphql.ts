@@ -26,6 +26,8 @@ export type Pokemon = {
   height?: Maybe<Scalars['String']['output']>;
   /** The identifier for this Pokemon. */
   id: Scalars['ID']['output'];
+  /** A list of moves this Pokemon can learn. */
+  moves: Array<PokemonMove>;
   /** The name for this Pokemon. */
   name: Scalars['String']['output'];
   /** The URL of the Pokemon image */
@@ -43,6 +45,18 @@ export type PokemonAbility = {
   /** The identifier for this ability. */
   id: Scalars['ID']['output'];
   /** The name for this ability. */
+  name: Scalars['String']['output'];
+};
+
+export type PokemonMove = {
+  __typename?: 'PokemonMove';
+  /** The accuracy of this move. */
+  accuracy?: Maybe<Scalars['String']['output']>;
+  /** The display name for this move. */
+  displayName: Scalars['String']['output'];
+  /** The identifier for this move. */
+  id: Scalars['ID']['output'];
+  /** The name for this move. */
   name: Scalars['String']['output'];
 };
 
@@ -92,7 +106,7 @@ export type GetPokemonByTypeQueryVariables = Exact<{
 }>;
 
 
-export type GetPokemonByTypeQuery = { __typename?: 'Query', pokemonByType: Array<{ __typename?: 'Pokemon', id: string, name: string, displayName: string, height?: string | null, weight?: string | null, sprites: { __typename?: 'PokemonSprites', frontDefault?: string | null }, abilities: Array<{ __typename?: 'PokemonAbility', id: string, name: string, displayName: string }> }> };
+export type GetPokemonByTypeQuery = { __typename?: 'Query', pokemonByType: Array<{ __typename?: 'Pokemon', id: string, name: string, displayName: string, height?: string | null, weight?: string | null, sprites: { __typename?: 'PokemonSprites', frontDefault?: string | null }, abilities: Array<{ __typename?: 'PokemonAbility', id: string, name: string, displayName: string }>, moves: Array<{ __typename?: 'PokemonMove', id: string, name: string, displayName: string, accuracy?: string | null }> }> };
 
 
-export const GetPokemonByTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPokemonByType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pokemonType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pokemonByType"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pokemonType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pokemonType"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"sprites"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"frontDefault"}}]}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"weight"}},{"kind":"Field","name":{"kind":"Name","value":"abilities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}}]}}]}}]}}]} as unknown as DocumentNode<GetPokemonByTypeQuery, GetPokemonByTypeQueryVariables>;
+export const GetPokemonByTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPokemonByType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pokemonType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pokemonByType"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pokemonType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pokemonType"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"sprites"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"frontDefault"}}]}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"weight"}},{"kind":"Field","name":{"kind":"Name","value":"abilities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"moves"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"accuracy"}}]}}]}}]}}]} as unknown as DocumentNode<GetPokemonByTypeQuery, GetPokemonByTypeQueryVariables>;

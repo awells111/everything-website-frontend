@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query GetPokemonByType($pokemonType: String!) {\n    pokemonByType(pokemonType: $pokemonType) {\n      id\n      name\n      displayName\n      sprites {\n        frontDefault\n      }\n      height\n      weight\n      abilities {\n        id\n        name\n        displayName\n      }\n    }\n  }\n": types.GetPokemonByTypeDocument,
+    "\n  query GetPokemonByType($pokemonType: String!) {\n    pokemonByType(pokemonType: $pokemonType) {\n      id\n      name\n      displayName\n      sprites {\n        frontDefault\n      }\n      height\n      weight\n      abilities {\n        id\n        name\n        displayName\n      }\n      moves {\n        id\n        name\n        displayName\n        accuracy\n      }\n    }\n  }\n": types.GetPokemonByTypeDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetPokemonByType($pokemonType: String!) {\n    pokemonByType(pokemonType: $pokemonType) {\n      id\n      name\n      displayName\n      sprites {\n        frontDefault\n      }\n      height\n      weight\n      abilities {\n        id\n        name\n        displayName\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetPokemonByType($pokemonType: String!) {\n    pokemonByType(pokemonType: $pokemonType) {\n      id\n      name\n      displayName\n      sprites {\n        frontDefault\n      }\n      height\n      weight\n      abilities {\n        id\n        name\n        displayName\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query GetPokemonByType($pokemonType: String!) {\n    pokemonByType(pokemonType: $pokemonType) {\n      id\n      name\n      displayName\n      sprites {\n        frontDefault\n      }\n      height\n      weight\n      abilities {\n        id\n        name\n        displayName\n      }\n      moves {\n        id\n        name\n        displayName\n        accuracy\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetPokemonByType($pokemonType: String!) {\n    pokemonByType(pokemonType: $pokemonType) {\n      id\n      name\n      displayName\n      sprites {\n        frontDefault\n      }\n      height\n      weight\n      abilities {\n        id\n        name\n        displayName\n      }\n      moves {\n        id\n        name\n        displayName\n        accuracy\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
