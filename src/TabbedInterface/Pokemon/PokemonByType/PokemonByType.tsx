@@ -62,43 +62,45 @@ function PokemonByType() {
   return (
     <div>
       <h2>Pokémon by Type</h2>
-      <Select
-        placeholder="Select a Pokemon Type"
-        value={selectedType}
-        onChange={(e, value) => onSelectPokemon(value)}
-        {...(selectedType && {
-          // display the button and remove select indicator
-          // when user has selected a value
-          endDecorator: (
-            <IconButton
-              size="sm"
-              variant="plain"
-              color="neutral"
-              onMouseDown={(event) => {
-                // don't open the popup when clicking on this button
-                event.stopPropagation();
-              }}
-              onClick={() => {
-                setSelectedType("");
-                action.current?.focusVisible();
-              }}
-            >
-              <CloseRounded />
-            </IconButton>
-          ),
-          indicator: null,
-        })}
-        sx={{ minWidth: 160 }}
-      >
-        {pokemonTypes.map((type) => (
-          <Option key={type.name} value={type.name}>
-            {type.display}
-          </Option>
-        ))}
-      </Select>
-      <Button loading={loading} onClick={() => getPokemonByType()}>
-        Fetch Pokémon
-      </Button>
+      <div style={{ display: "flex", gap: 1.5 , justifyContent: "center" }}>
+        <Select
+          placeholder="Select a Pokemon Type"
+          value={selectedType}
+          onChange={(e, value) => onSelectPokemon(value)}
+          {...(selectedType && {
+            // display the button and remove select indicator
+            // when user has selected a value
+            endDecorator: (
+              <IconButton
+                size="sm"
+                variant="plain"
+                color="neutral"
+                onMouseDown={(event) => {
+                  // don't open the popup when clicking on this button
+                  event.stopPropagation();
+                }}
+                onClick={() => {
+                  setSelectedType("");
+                  action.current?.focusVisible();
+                }}
+              >
+                <CloseRounded />
+              </IconButton>
+            ),
+            indicator: null,
+          })}
+          sx={{ minWidth: 220 }}
+        >
+          {pokemonTypes.map((type) => (
+            <Option key={type.name} value={type.name}>
+              {type.display}
+            </Option>
+          ))}
+        </Select>
+        <Button loading={loading} onClick={() => getPokemonByType()}>
+          Fetch Pokémon
+        </Button>
+      </div>
 
       {error && <p style={{ color: "red" }}>{error.message}</p>}
       <Grid container spacing={2} sx={{ flexGrow: 1 }}>
