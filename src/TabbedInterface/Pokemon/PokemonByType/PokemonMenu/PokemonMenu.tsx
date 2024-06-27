@@ -1,5 +1,8 @@
 import React from "react";
-import { GetPokemonByTypeQuery, Pokemon } from "../../../../__generated__/graphql";
+import {
+  GetPokemonByTypeQuery,
+  Pokemon,
+} from "../../../../__generated__/graphql";
 import {
   List,
   ListItem,
@@ -10,8 +13,8 @@ import {
 
 type Props = {
   data: GetPokemonByTypeQuery | undefined;
-  pokemon: Pokemon[]
-  setActivePokemon: React.Dispatch<React.SetStateAction<Pokemon | null>>
+  pokemon: Pokemon[];
+  setActivePokemon: React.Dispatch<React.SetStateAction<Pokemon | null>>;
 };
 
 function PokemonMenu({ data, pokemon, setActivePokemon }: Props) {
@@ -22,7 +25,7 @@ function PokemonMenu({ data, pokemon, setActivePokemon }: Props) {
           <p>
             <strong>Total Pokémon:</strong> {pokemon.length}
           </p>
-          <List>
+          <List className="pokemon-list">
             {pokemon.map((item, index) => (
               <ListItem key={index}>
                 <ListItemButton onClick={() => setActivePokemon(item)}>
