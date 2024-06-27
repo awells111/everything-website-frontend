@@ -6,7 +6,7 @@ import { Tab, TabList, TabPanel, Tabs } from "@mui/joy";
 
 const TabbedInterface: React.FC = () => {
   return (
-    <Tabs>
+    <Tabs sx={{ height: "100vh" }}>
       <TabList>
         <Tab>Char Counter</Tab>
         <Tab>Pokémon</Tab>
