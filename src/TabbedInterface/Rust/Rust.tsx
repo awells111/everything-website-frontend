@@ -1,10 +1,11 @@
 import React from 'react'
+import Smelter from './Smelter/Smelter'
 
 type Props = {}
 
 function Rust({}: Props) {
   return (
-    <div>Rust</div>
+    <Smelter />
   )
 }
 
