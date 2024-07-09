@@ -1,3 +1,4 @@
+import { Button, Input } from "@mui/joy";
 import React, { useState } from "react";
 
 export type PokemonDetailsType = {
@@ -62,13 +63,13 @@ const PokemonSearch: React.FC = () => {
   return (
     <div>
       <h2>Search Pokémon</h2>
-      <input
+      <Input
         type="text"
         value={pokemonName}
         onChange={(e) => setPokemonName(e.target.value)}
         placeholder="Enter Pokémon name"
       />
-      <button onClick={handleSearch}>Search</button>
+      <Button onClick={handleSearch}>Search</Button>
       {pokemonDetails && (
         <div>
           <h3>{pokemonDetails.name}</h3>
