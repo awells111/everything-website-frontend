@@ -37,13 +37,11 @@ function PokemonByType() {
   const [selectedType, setSelectedType] = useState<string>("");
   const [activePokemon, setActivePokemon] = useState<Pokemon | null>(null);
   const action: SelectStaticProps["action"] = React.useRef(null);
+  
 
-  const [getPokemonByType, { loading, error, data }] = useLazyQuery(
-    POKEMON_BY_TYPE,
-    {
-      variables: { pokemonType: selectedType },
-    }
-  );
+  
+  const [getPokemonByType, { loading, error, data }] = useLazyQuery(POKEMON_BY_TYPE);
+
 
   const pokemon: Pokemon[] = useMemo(() => {
     if (!data) {
@@ -58,6 +56,10 @@ function PokemonByType() {
     if (!value) return;
     setSelectedType(value);
   }
+  function handleFetchClick() {
+    if (!selectedType) return;
+    getPokemonByType({ variables: { pokemonType: selectedType } });
+  }
 
   return (
     <div>
@@ -67,7 +69,7 @@ function PokemonByType() {
           placeholder="Select a Pokemon Type"
           value={selectedType}
           onChange={(e, value) => onSelectPokemon(value)}
-          {...(selectedType && {
+          {...(selectedType && selectedType !== "" && {
             // display the button and remove select indicator
             // when user has selected a value
             endDecorator: (
@@ -80,6 +82,8 @@ function PokemonByType() {
                   event.stopPropagation();
                 }}
                 onClick={() => {
+                  // clear selection
+                  
                   setSelectedType("");
                   action.current?.focusVisible();
                 }}
@@ -91,13 +95,16 @@ function PokemonByType() {
           })}
           sx={{ minWidth: 220 }}
         >
-          {pokemonTypes.map((type) => (
+                {pokemonTypes.map((type) => (
             <Option key={type.name} value={type.name}>
               {type.display}
             </Option>
           ))}
         </Select>
-        <Button loading={loading} onClick={() => getPokemonByType()}>
+        <Button
+          loading={loading}
+          onClick={handleFetchClick}
+        >
           Fetch Pokémon
         </Button>
       </div>
@@ -110,6 +117,7 @@ function PokemonByType() {
               data={data}
               pokemon={pokemon}
               setActivePokemon={setActivePokemon}
+              
             />
           </div>
         </Grid>
