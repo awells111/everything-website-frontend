@@ -16,10 +16,14 @@ function PokeContainer({ children, backgroundColor, pokemonName }: Props) {
         minWidth: "100px",
         padding: "10px",
         margin: "10px",
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      <Button>{pokemonName}</Button>
-      <div style={{ display: "flex" }}>{children}</div>
+      <span>
+        <Button>{pokemonName}</Button>
+      </span>
+      <div style={{ display: "flex", flexDirection: "column" }}>{children}</div>
     </div>
   );
 }
