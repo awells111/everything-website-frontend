@@ -1,6 +1,7 @@
-import { Button, Typography } from "@mui/joy";
+import { Typography } from "@mui/joy";
 import React from "react";
 import DemoData from "./DemoData";
+import PokeContainer from "./PokeContainer/PokeContainer";
 
 function PokeTree() {
   const tree = DemoData();
@@ -10,7 +11,7 @@ function PokeTree() {
   const rowThree = [];
 
   // Props passed in from parent
-  const [activePokemon, setActivePokemon] = React.useState<string>("");
+  // const [activePokemon, setActivePokemon] = React.useState<string>("");
 
   for (let i = 0; i < rowOne.length; i++) {
     const previousPokemon = rowOne[i];
@@ -28,11 +29,10 @@ function PokeTree() {
     }
   }
 
-  
   console.log(1);
   console.log(rowOne);
-  console.log(2)
-  console.log(rowTwo)
+  console.log(2);
+  console.log(rowTwo);
   console.log(3);
   console.log(rowThree);
 
@@ -44,7 +44,45 @@ function PokeTree() {
   return (
     <div>
       <Typography level="h2">PokeDemo</Typography>
-      <div>{/* Row 1 */}</div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <PokeContainer backgroundColor="red" pokemonName="Bulbasaur">
+          <PokeContainer backgroundColor="blue" pokemonName="Ivysaur">
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+
+            <PokeContainer
+              backgroundColor="green"
+              pokemonName="Venusaur"
+              children={undefined}
+            />
+          </PokeContainer>
+
+          <PokeContainer backgroundColor="blue" pokemonName="Ivysaur">
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+            <PokeContainer backgroundColor="green" pokemonName="Venusaur" />
+          </PokeContainer>
+        </PokeContainer>
+      </div>
+
+      {/* Add some space */}
+      <div style={{ minHeight: "100px", minWidth: "100px", padding: "10px" }} />
+
+      {/* 3 Rows */}
+      {/* <PokeContainer backgroundColor="red">
+        <Button>Bulbasaur</Button>
+      </PokeContainer>
+
+      <PokeContainer backgroundColor="blue">
+        <Button>Ivysaur</Button>
+      </PokeContainer>
+
+      <PokeContainer backgroundColor="green">
+        <Button>Venusaur</Button>
+      </PokeContainer> */}
     </div>
   );
 }
