@@ -1,0 +1,10 @@
+.button-with-arrow {
+    position: relative;
+  }
+  
+  .button-with-arrow::after {
+    content: ' ▼'; /* Unicode character for down arrow */
+    position: absolute;
+    right: px; /* Adjust based on your needs */
+  }
+  

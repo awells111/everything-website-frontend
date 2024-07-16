@@ -29,17 +29,18 @@ function PokeTree() {
     }
   }
 
-  console.log(1);
-  console.log(rowOne);
-  console.log(2);
-  console.log(rowTwo);
-  console.log(3);
-  console.log(rowThree);
+  // console.log(1);
+  // console.log(rowOne);
+  // console.log(2);
+  // console.log(rowTwo);
+  // console.log(3);
+  // console.log(rowThree);
 
   // for (let i = 0; i < rowTwo.length; i++) {
   //   const previousPokemon = rowTwo[i]
   //   rowThree.push(previousPokemon.evolves_to);
   // }
+  
 
   return (
     <div>
@@ -85,6 +86,8 @@ function PokeTree() {
       </PokeContainer> */}
     </div>
   );
-}
+};
+
+
 
 export default PokeTree;
