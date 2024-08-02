@@ -1,4 +1,5 @@
-import React from "react";
+import { Typography } from "@mui/joy";
+import React, { useMemo } from "react";
 
 type Props = {};
 interface ResourceRequirements {
@@ -21,12 +22,21 @@ function TCUpkeep({}: Props) {
     metal: 500,
     highQualityMetal: 100,
   };
-  const optimalUpkeep = calculateOptimalUpkeep(dailyRequirements);
-  console.log("Optimal Upkeep:", optimalUpkeep);
   // console.log("Optimal Upkeep Distribution:", distribution);
   // console.log("Maximum Number of Days:", maxDays);
+  const optimalUpkeep = useMemo(
+    () => calculateOptimalUpkeep(dailyRequirements),
+    [dailyRequirements]
+  );
 
-  return <div>TCUpkeep</div>;
+  const upkeepString = JSON.stringify(optimalUpkeep);
+
+  return (
+    <div>
+      <Typography level="h2">TCUpkeep</Typography>
+      <Typography level="body-lg">{upkeepString}</Typography>
+    </div>
+  );
 }
 
 function calculateOptimalUpkeep(dailyRequirements: ResourceRequirements): {
