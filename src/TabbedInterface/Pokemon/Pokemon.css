@@ -16,13 +16,27 @@
     height: 96px;
     margin-bottom: 10px;
   }
-  
   .pokemon-item p {
     margin: 0;
     font-size: 1.2em;
     text-align: center;
   }
-  
+* {
+    cursor: none;
+  }
+  .cursor {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: url('./Images/Ditto\ Dancing.gif');
+    background-size: cover;
+    z-index: 1;
+    cursor: none;
+  }
   /* Responsive adjustments */
   @media (max-width: 1200px) {
     .pokemon-item {
