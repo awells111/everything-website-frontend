@@ -1,3 +1,4 @@
+.pokemon {
   .pokemon-item {
     display: flex;
     flex-direction: column;
@@ -10,7 +11,7 @@
     box-sizing: border-box;
     margin-bottom: 10px;
   }
-  
+
   .pokemon-item img {
     width: 96px;
     height: 96px;
@@ -21,9 +22,6 @@
     font-size: 1.2em;
     text-align: center;
   }
-* {
-    cursor: none;
-  }
   .cursor {
     height: 32px;
     width: 32px;
@@ -32,7 +30,7 @@
     top: 0;
     left: 0;
     pointer-events: none;
-    background-image: url('./Images/Ditto\ Dancing.gif');
+    background-image: url("./Images/Ditto\ Dancing.gif");
     background-size: cover;
     z-index: 1;
     cursor: none;
@@ -43,10 +41,10 @@
       width: calc(50% - 20px); /* For a 2-column layout on medium screens */
     }
   }
-  
+
   @media (max-width: 768px) {
     .pokemon-item {
       width: calc(100% - 20px); /* For a 1-column layout on small screens */
     }
   }
-  
+}

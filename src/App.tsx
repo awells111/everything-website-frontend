@@ -6,6 +6,7 @@ import TabbedInterface from "./TabbedInterface/TabbedInterface";
 const App: React.FC = () => {
   return (
     <div className="App">
+      <div className="blue-box"></div>
       <TabbedInterface />
     </div>
   );

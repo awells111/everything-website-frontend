@@ -3,26 +3,29 @@ import "./Pokemon.css";
 import PokemonByType from "./PokemonByType/PokemonByType";
 import { motion } from "framer-motion";
 
+var BEMHelper = require("react-bem-helper");
+
+var classes = new BEMHelper("pokemon");
 
 const Pokemon: React.FC = () => {
   const [mousePosition, setMousePosition] = React.useState({
     x: 0,
-    y: 0
+    y: 0,
   });
-  console.log(mousePosition);
+  //console.log(mousePosition);
   useEffect(() => {
-    const mouseMove = (e: { clientX: any; clientY: any; }) => {
+    const mouseMove = (e: { clientX: any; clientY: any }) => {
       setMousePosition({
         x: e.clientX,
-        y: e.clientY
-      })
-    }
+        y: e.clientY,
+      });
+    };
     window.addEventListener("mousemove", mouseMove);
 
     return () => {
       window.removeEventListener("mousemove", mouseMove);
     };
-  })
+  });
   const variants = {
     default: {
       x: mousePosition.x - 16,
@@ -32,15 +35,11 @@ const Pokemon: React.FC = () => {
         duration: 0,
       },
     },
-  }
+  };
   return (
-    <div className="pokemon-tab">
+    <div {...classes()}>
       <PokemonByType />
-      <motion.div
-        className="cursor"
-        variants={variants}
-        animate= "default"
-      />
+      <motion.div className="cursor" variants={variants} animate="default" />
     </div>
   );
 };
