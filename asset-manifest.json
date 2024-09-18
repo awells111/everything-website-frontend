@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/everything-website-frontend/react-gh-pages/static/css/main.2a71125b.css",
+    "main.js": "/everything-website-frontend/react-gh-pages/static/js/main.c9acd046.js",
+    "static/js/453.d7e09183.chunk.js": "/everything-website-frontend/react-gh-pages/static/js/453.d7e09183.chunk.js",
+    "static/media/Ditto Dancing.gif": "/everything-website-frontend/react-gh-pages/static/media/Ditto Dancing.86660f8be4ad43597584.gif",
+    "index.html": "/everything-website-frontend/react-gh-pages/index.html",
+    "main.2a71125b.css.map": "/everything-website-frontend/react-gh-pages/static/css/main.2a71125b.css.map",
+    "main.c9acd046.js.map": "/everything-website-frontend/react-gh-pages/static/js/main.c9acd046.js.map",
+    "453.d7e09183.chunk.js.map": "/everything-website-frontend/react-gh-pages/static/js/453.d7e09183.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a71125b.css",
+    "static/js/main.c9acd046.js"
+  ]
+}
