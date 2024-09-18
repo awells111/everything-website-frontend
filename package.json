@@ -1,7 +1,7 @@
 {
   "name": "everything-website-frontend",
   "version": "0.1.0",
-  "homepage": "https://awells111.github.io/everything-website-frontend",
+  "homepage": "https://awells111.github.io/everything-website-frontend/react-gh-pages",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.10.5",
