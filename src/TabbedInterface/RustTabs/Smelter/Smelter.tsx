@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Input, Typography } from "@mui/joy";
+import { Grid, Typography } from "@mui/joy";
+import WholeNumberInput from "../../../components/WholeNumberInput";
 
 // It takes this amount of wood to smelt 1 metal
 const METAL_WOOD_COUNT = 1.67;
@@ -52,26 +53,10 @@ function Smelter() {
         <Typography level="h2">Smelter</Typography>
       </Grid>
       <Grid xs={3}>
-        <Input
+        <WholeNumberInput
           value={metalOreCount}
-          onChange={(event) => {
-            const newValue = Number(event.target.value);
-            if (isNaN(newValue) || newValue < 0) {
-              return;
-            }
-            if (newValue < 0) {
-              return;
-            }
-            // Don't allow decimals
-            if (newValue % 1 !== 0) {
-              setMetalOreCount(Math.floor(newValue));
-              return;
-            }
-
-            setMetalOreCount(newValue);
-          }}
+          setValue={setMetalOreCount}
           placeholder="Metal ore count"
-          type="number"
         />
       </Grid>
       <Grid xs={12}>
@@ -87,26 +72,10 @@ function Smelter() {
       </Grid>
 
       <Grid xs={3}>
-        <Input
+        <WholeNumberInput
           value={sulfurOreCount}
-          onChange={(event) => {
-            const newValue = Number(event.target.value);
-            if (isNaN(newValue) || newValue < 0) {
-              return;
-            }
-            if (newValue < 0) {
-              return;
-            }
-            // Don't allow decimals
-            if (newValue % 1 !== 0) {
-              setSulfurOreCount(Math.floor(newValue));
-              return;
-            }
-
-            setSulfurOreCount(newValue);
-          }}
+          setValue={setSulfurOreCount}
           placeholder="Sulfur ore count"
-          type="number"
         />
       </Grid>
       <Grid xs={12}>

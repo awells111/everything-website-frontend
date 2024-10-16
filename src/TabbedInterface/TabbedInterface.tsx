@@ -1,4 +1,4 @@
-import React, { act, useState } from "react";
+import React, { useState } from "react";
 import CharCounter from "./CharCounter/CharCounter";
 import Pokemon from "./Pokemon/Pokemon";
 import { Tab, TabList, TabPanel, Tabs } from "@mui/joy";
