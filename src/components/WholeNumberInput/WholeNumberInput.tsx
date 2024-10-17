@@ -7,6 +7,17 @@ interface WholeNumberInputProps {
   placeholder: string;
 }
 
+/**
+ * A text input that restricts the user to typing a whole number, and rounds
+ * non-whole number values to the nearest whole number.
+ *
+ * @param value The current value of the input, which should be a number, or
+ * undefined if the input is empty.
+ * @param setValue A function that takes the new value of the input, and should
+ * be called when the user types a new value.
+ * @param placeholder A string to display in the input when the user has not
+ * typed anything.
+ */
 const WholeNumberInput: React.FC<WholeNumberInputProps> = ({
   value,
   setValue,

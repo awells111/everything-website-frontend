@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Typography } from "@mui/joy";
-import WholeNumberInput from "../../../components/WholeNumberInput";
+import WholeNumberInput from "../../../components/WholeNumberInput/WholeNumberInput";
 
 // It takes this amount of wood to smelt 1 metal
 const METAL_WOOD_COUNT = 1.67;
