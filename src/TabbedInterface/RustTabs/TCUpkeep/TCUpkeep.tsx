@@ -1,7 +1,6 @@
 import { Typography } from "@mui/joy";
 import React, { useMemo } from "react";
 
-type Props = {};
 interface ResourceRequirements {
   [resource: string]: number; // Daily requirement for each resource
 }
@@ -14,20 +13,20 @@ interface SlotDistribution {
   [resource: string]: number; // Slots allocated for each resource
 }
 
-function TCUpkeep({}: Props) {
-  // Example inputs
-  const dailyRequirements: ResourceRequirements = {
-    wood: 1000,
-    stone: 2000,
-    metal: 500,
-    highQualityMetal: 100,
-  };
-  // console.log("Optimal Upkeep Distribution:", distribution);
-  // console.log("Maximum Number of Days:", maxDays);
-  const optimalUpkeep = useMemo(
-    () => calculateOptimalUpkeep(dailyRequirements),
-    [dailyRequirements]
-  );
+function TCUpkeep() {
+  const optimalUpkeep = useMemo(() => {
+    // Example inputs
+    const dailyRequirements: ResourceRequirements = {
+      wood: 1000,
+      stone: 2000,
+      metal: 500,
+      highQualityMetal: 100,
+    };
+
+    calculateOptimalUpkeep(dailyRequirements);
+  }, [
+    // dailyRequirements
+  ]);
 
   const upkeepString = JSON.stringify(optimalUpkeep);
 
@@ -62,8 +61,6 @@ function calculateOptimalUpkeep(dailyRequirements: ResourceRequirements): {
     (a, b) => a[1] - b[1]
   );
   console.log("Sorted resources:", sortedResources);
-
-  let totalSlotsUsed = 0;
   const slotCapacity = 24;
 
   let days = 0;
@@ -87,7 +84,7 @@ function calculateOptimalUpkeep(dailyRequirements: ResourceRequirements): {
     for (const [resource, stacksPerDay] of sortedResources) {
       console.log("Resource:", resource, "Stacks per day:", stacksPerDay);
     }
-    let newResourceStackCount: { [resource: string]: number } = {};
+    const newResourceStackCount: { [resource: string]: number } = {};
 
     for (const [resource, stacksPerDay] of sortedResources) {
       newResourceStackCount[resource] =
@@ -105,7 +102,6 @@ function calculateOptimalUpkeep(dailyRequirements: ResourceRequirements): {
       console.log("Total stacks exceeds slot capacity");
       break;
     } else {
-      totalSlotsUsed += totalStacks;
       for (const [resource, stacksPerDay] of sortedResources) {
         currentResourceStackCount[resource] += stacksPerDay;
       }

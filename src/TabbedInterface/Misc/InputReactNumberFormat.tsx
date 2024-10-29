@@ -1,7 +1,5 @@
 import * as React from "react";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
 import Input from "@mui/joy/Input";
 import { Grid } from "@mui/joy";
 

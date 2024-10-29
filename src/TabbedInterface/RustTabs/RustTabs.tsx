@@ -4,9 +4,7 @@ import Smelter from "./Smelter/Smelter";
 import TCUpkeep from "./TCUpkeep/TCUpkeep";
 import ResourceCalculator from "./ResourceCalculator/ResourceCalculator";
 
-type Props = {};
-
-function RustTabs({}: Props) {
+function RustTabs() {
   return (
     <Tabs sx={{ height: "100%" }}>
       <TabList>

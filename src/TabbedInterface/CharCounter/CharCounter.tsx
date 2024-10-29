@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { text } from "stream/consumers";
 
 /**
  * A React functional component that provides a character counter.
@@ -13,7 +12,7 @@ import { text } from "stream/consumers";
  */
 function CharCounter() {
   const [textBoxContent, setTextBoxContent] = useState("");
-  const countWords = (text : String) => {
+  const countWords = (text : string) => {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length;
   };
   return (
