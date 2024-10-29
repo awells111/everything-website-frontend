@@ -8,8 +8,8 @@ import BEMHelper from "react-bem-helper";
 import "./TabbedInterface.css";
 import InputReactNumberFormat from "./Misc/InputReactNumberFormat";
 import Misc from "./Misc/Misc";
-var classes = new BEMHelper("tabbed-interface");
-
+import ChatGPT from "./ChatGPT/ChatGPT";
+const classes = new BEMHelper("tabbed-interface");
 
 const TabbedInterface: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -28,6 +28,7 @@ const TabbedInterface: React.FC = () => {
         <Tab>Rust</Tab>
         <Tab>PokeDemo</Tab>
         <Tab>Misc</Tab>
+        <Tab>ChatGPT</Tab>
       </TabList>
       <TabPanel value={0}>
         <CharCounter />
@@ -44,6 +45,9 @@ const TabbedInterface: React.FC = () => {
       <TabPanel value={4}>
         <Misc />
         <InputReactNumberFormat />
+      </TabPanel>
+      <TabPanel value={5}>
+        <ChatGPT />
       </TabPanel>
     </Tabs>
   );
