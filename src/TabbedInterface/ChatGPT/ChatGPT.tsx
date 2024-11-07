@@ -1,11 +1,16 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import OpenAI from "openai";
+import { Card, Typography } from "@mui/joy";
 
 function ChatGPT() {
+  const [message, setMessage] = useState("");
   async function callOpenAI() {
-    const openai = new OpenAI({ apiKey: process.env.REACT_APP_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
+    const openai = new OpenAI({
+      apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+      dangerouslyAllowBrowser: true,
+    });
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
@@ -16,7 +21,7 @@ function ChatGPT() {
         },
       ],
     });
-    console.log(completion.choices[0].message);
+    setMessage(completion.choices[0].message.content ?? "Error");
   }
 
   // Call only on the first load
@@ -24,7 +29,12 @@ function ChatGPT() {
     callOpenAI();
   }, []);
 
-  return <div>ChatGPT</div>;
+  return (
+    <Card variant="outlined" sx={{ maxWidth: 400 }}>
+      <Typography level="h1">ChatGPT</Typography>
+      <Typography>{message}</Typography>
+    </Card>
+  );
 }
 
 export default ChatGPT;
